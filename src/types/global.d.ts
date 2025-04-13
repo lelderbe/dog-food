@@ -53,20 +53,20 @@ declare global {
 
     interface IUser {
         id: string;
-        createdAt: string;
-        updatedAt: string;
+        createdAt?: string;
+        updatedAt?: string;
         email: string;
-        password: string;
-        provider: null; // TODO: check type
-        isAdmin: boolean;
-        isBlocked: boolean;
+        password?: string;
+        provider?: null; // TODO: check type
+        isAdmin?: boolean;
+        isBlocked?: boolean;
         name: string;
         avatarPath: string;
         about: string;
         phone: string;
         roles: string[]; // ["USER"]; TODO: check type
-        likes: ILike[];
-        favoritesPost: IFavoritesPost[];
+        likes?: ILike[];
+        favoritesPost?: IFavoritesPost[];
     }
 
     interface IFavoritesPost {
