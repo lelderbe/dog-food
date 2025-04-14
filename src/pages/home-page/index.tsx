@@ -1,21 +1,19 @@
-import { useState } from "react";
-import { CardList } from "../../components/card-list";
-import { Footer } from "../../components/footer";
-import { Header } from "../../components/header";
-import { Sort } from "../../components/sort";
-import { productsData } from "../../mocks/products";
-import { Typography } from "@mui/material";
+import { useState } from 'react';
+import { ProductsList } from '../../components/products-list';
+import { Sort } from '../../components/sort';
+import { productsData } from '../../mocks/products';
+import { Container, Typography } from '@mui/material';
 
 export function HomePage() {
     const [products, setProducts] = useState<IProduct[]>(productsData.products);
 
     return (
-        <main>
-            <Header />
-            <Typography variant="h0">Test</Typography>
+        <Container component="main" disableGutters sx={{ padding: '20px 0', flex: '1' }}>
+            <Typography variant="h1" sx={{ mb: '20px' }}>
+                Каталог
+            </Typography>
             <Sort />
-            <CardList products={products} />
-            <Footer />
-        </main>
+            <ProductsList products={products} />
+        </Container>
     );
 }

@@ -1,6 +1,6 @@
-import { createTheme } from "@mui/material";
+import { createTheme } from '@mui/material';
 
-declare module "@mui/material/styles" {
+declare module '@mui/material/styles' {
     interface TypographyVariants {
         h0: React.CSSProperties;
         p1: React.CSSProperties;
@@ -20,7 +20,7 @@ declare module "@mui/material/styles" {
 }
 
 // Update the Typography's variant prop options
-declare module "@mui/material/Typography" {
+declare module '@mui/material/Typography' {
     interface TypographyPropsVariantOverrides {
         h0: true;
         p1: true;
@@ -31,31 +31,36 @@ declare module "@mui/material/Typography" {
 }
 
 // Custom colors
-declare module "@mui/material/styles" {
+declare module '@mui/material/styles' {
     interface Palette {
-        outline: Palette["primary"];
-        form: Palette["primary"];
-        red: Palette["primary"];
-        green: Palette["primary"];
-        blue: Palette["primary"];
+        outline: Palette['primary'];
+        form: Palette['primary'];
+        red: Palette['primary'];
+        green: Palette['primary'];
+        blue: Palette['primary'];
     }
 
     interface PaletteOptions {
-        outline?: PaletteOptions["primary"];
-        form?: PaletteOptions["primary"];
-        red?: PaletteOptions["primary"];
-        green?: PaletteOptions["primary"];
-        blue?: PaletteOptions["primary"];
+        outline?: PaletteOptions['primary'];
+        form?: PaletteOptions['primary'];
+        red?: PaletteOptions['primary'];
+        green?: PaletteOptions['primary'];
+        blue?: PaletteOptions['primary'];
     }
 }
 
-declare module "@mui/material/Button" {
+declare module '@mui/material/Button' {
     interface ButtonPropsColorOverrides {
         outline: true;
         form: true;
         red: true;
         blue: true;
         green: true;
+    }
+
+    interface ButtonPropsVariantOverrides {
+        primary: true;
+        secondary: true;
     }
 }
 
@@ -71,73 +76,73 @@ let theme = createTheme({
     },
     palette: {
         primary: {
-            main: "#FFE44D",
-            light: "#FFF5C0",
-            dark: "#FFAA0D",
+            main: '#FFE44D',
+            light: '#FFF5C0',
+            dark: '#FFAA0D',
         },
         error: {
-            main: "#F44336",
+            main: '#F44336',
         },
         info: {
-            main: "#03A9F4",
+            main: '#03A9F4',
         },
         success: {
-            main: "#01A54E",
+            main: '#01A54E',
         },
         text: {
-            primary: "#1A1A1A",
-            secondary: "#7B8E98",
+            primary: '#1A1A1A',
+            secondary: '#7B8E98',
         },
     },
     typography: {
-        fontFamily: "Nunito, Arial",
+        fontFamily: 'Nunito, Arial',
         fontSize: 16,
         h0: {
-            fontWeight: "900",
-            fontSize: "48px",
-            lineHeight: "52px",
+            fontWeight: '900',
+            fontSize: '48px',
+            lineHeight: '52px',
             letterSpacing: 0,
         },
         h1: {
-            fontWeight: "800",
-            fontSize: "28px",
-            lineHeight: "32px",
+            fontWeight: '800',
+            fontSize: '28px',
+            lineHeight: '32px',
             letterSpacing: 0,
         },
         h2: {
-            fontWeight: "800",
-            fontSize: "24px",
-            lineHeight: "28px",
+            fontWeight: '800',
+            fontSize: '24px',
+            lineHeight: '28px',
             letterSpacing: 0,
         },
         h3: {
-            fontWeight: "800",
-            fontSize: "20px",
-            lineHeight: "24px",
+            fontWeight: '800',
+            fontSize: '20px',
+            lineHeight: '24px',
             letterSpacing: 0,
         },
         p1: {
-            fontWeight: "400",
-            fontSize: "16px",
-            lineHeight: "20px",
+            fontWeight: '400',
+            fontSize: '16px',
+            lineHeight: '20px',
             letterSpacing: 0,
         },
         p2: {
-            fontWeight: "400",
-            fontSize: "14px",
-            lineHeight: "20px",
+            fontWeight: '400',
+            fontSize: '14px',
+            lineHeight: '20px',
             letterSpacing: 0,
         },
         s1: {
-            fontWeight: "400",
-            fontSize: "12px",
-            lineHeight: "14px",
+            fontWeight: '400',
+            fontSize: '12px',
+            lineHeight: '14px',
             letterSpacing: 0,
         },
         s2: {
-            fontWeight: "400",
-            fontSize: "9px",
-            lineHeight: "12px",
+            fontWeight: '400',
+            fontSize: '9px',
+            lineHeight: '12px',
             letterSpacing: 0,
         },
     },
@@ -148,34 +153,79 @@ theme = createTheme(theme, {
     palette: {
         outline: theme.palette.augmentColor({
             color: {
-                main: "#CFD8DC",
+                main: '#CFD8DC',
             },
-            name: "outline",
+            name: 'outline',
         }),
         form: theme.palette.augmentColor({
             color: {
-                main: "#ECEFF1",
+                main: '#ECEFF1',
             },
-            name: "form",
+            name: 'form',
         }),
         red: theme.palette.augmentColor({
             color: {
-                main: "#F44336",
+                main: '#F44336',
             },
-            name: "red",
+            name: 'red',
         }),
         blue: theme.palette.augmentColor({
             color: {
-                main: "#03A9F4",
+                main: '#03A9F4',
             },
-            name: "blue",
+            name: 'blue',
         }),
         green: theme.palette.augmentColor({
             color: {
-                main: "#01A54E",
+                main: '#01A54E',
             },
-            name: "green",
+            name: 'green',
         }),
+    },
+});
+
+theme = createTheme(theme, {
+    components: {
+        MuiButton: {
+            defaultProps: {
+                color: 'primary',
+            },
+            styleOverrides: {
+                root: {
+                    padding: '10px 18px',
+                    fontWeight: '700',
+                    textTransform: 'none',
+                    color: theme.palette.text.primary,
+                },
+            },
+            variants: [
+                {
+                    props: { variant: 'primary' },
+                    style: {
+                        fontFamily: theme.typography.fontFamily,
+                        fontSize: '16px',
+                        lineHeight: '20px',
+                        borderRadius: '55px',
+                        backgroundColor: theme.palette.primary.main,
+                        '&:hover': {
+                            backgroundColor: theme.palette.primary.dark,
+                        },
+                        '&:disabled': {
+                            backgroundColor: theme.palette.outline.main,
+                            color: theme.palette.common.white,
+                        },
+                    },
+                },
+                {
+                    props: { variant: 'secondary' },
+                    style: {
+                        borderRadius: '87px',
+                        border: `1px solid ${theme.palette.outline.main}`,
+                        backgroundColor: theme.palette.common.white,
+                    },
+                },
+            ],
+        },
     },
 });
 
