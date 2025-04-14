@@ -78,7 +78,12 @@ export function ProductCard({ name, images, price, wight, discount }: IProduct) 
                 >
                     {discountPrice ? discountPrice.toFixed(0) : price} ₽
                 </Typography>
-                <Typography component="p" variant="caption" color="text.secondary" sx={{ mb: '2px', lineHeight: 24 }}>
+                <Typography
+                    component="p"
+                    variant="caption"
+                    color="text.secondary"
+                    sx={{ mb: '2px', lineHeight: '14px' }}
+                >
                     {wight}
                 </Typography>
                 <Typography

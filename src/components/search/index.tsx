@@ -39,13 +39,21 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-export function Search() {
+interface IProps {
+    onChange: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export function Search({ onChange }: IProps) {
     return (
         <SearchElem>
             <SearchIconWrapper>
                 <SearchIcon />
             </SearchIconWrapper>
-            <StyledInputBase placeholder="Поиск" inputProps={{ 'aria-label': 'search' }} />
+            <StyledInputBase
+                placeholder="Поиск"
+                inputProps={{ 'aria-label': 'search' }}
+                onChange={(e) => onChange(e.target.value.toLowerCase())}
+            />
         </SearchElem>
     );
 }
