@@ -1,4 +1,3 @@
-import s from './styles.module.css';
 import { HomePage } from '../pages/home-page';
 import { Footer } from '../components/footer';
 import { Header } from '../components/header';

@@ -1,39 +1,7 @@
-import {
-    Button,
-    ButtonProps,
-    Card as MUICard,
-    CardMedia,
-    Grid,
-    IconButton,
-    styled,
-    Typography,
-    Badge,
-    Box,
-} from '@mui/material';
+import { Button, Card as MUICard, CardMedia, Grid, IconButton, Typography, Badge, Box } from '@mui/material';
 import { SyntheticEvent } from 'react';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import noImage from './assets/no-image.png';
-
-const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
-    boxShadow: 'none',
-    textTransform: 'none',
-    padding: '10px 18px',
-    border: 'none',
-    color: theme.palette.text.primary,
-    backgroundColor: theme.palette.primary.main,
-    borderRadius: '55px',
-    '&:hover': {
-        backgroundColor: '#FFAA0D',
-        color: '#F44336',
-        boxShadow: 'none',
-    },
-    '&:active': {
-        boxShadow: 'none',
-    },
-    '&:focus': {
-        boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
-    },
-}));
 
 export function ProductCard({ name, images, price, wight, discount }: IProduct) {
     const discountPrice = price - (price * discount) / 100;
