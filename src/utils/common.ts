@@ -7,3 +7,7 @@ export function plural(n: number, words: [string, string, string]) {
     }
     return words[index];
 }
+
+export function isLiked(currentLikes: IFavoriteUser[] = [], userId = '') {
+    return currentLikes.some((item) => item.userId === userId);
+}

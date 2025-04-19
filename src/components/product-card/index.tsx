@@ -1,10 +1,25 @@
 import { Button, Card as MUICard, CardMedia, Grid, IconButton, Typography, Badge, Box } from '@mui/material';
 import { SyntheticEvent } from 'react';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import noImage from './assets/no-image.png';
+import { isLiked } from '../../utils/common';
 
-export function ProductCard({ name, images, price, wight, discount }: IProduct) {
+interface IProps extends IProduct {
+    currentUser: IUser | null;
+    onLike: (productData: IProductLikeParam) => void;
+}
+
+export function ProductCard({ id, name, images, price, wight, discount, likes, currentUser, onLike }: IProps) {
     const discountPrice = price - (price * discount) / 100;
+
+    const hasLike = isLiked(likes, currentUser?.id);
+
+    const handleLikeClick = () => {
+        if (likes) {
+            onLike({ id, likes });
+        }
+    };
 
     return (
         <Grid size={{ xs: 6, sm: 4, md: 4, lg: 3 }}>
@@ -25,8 +40,8 @@ export function ProductCard({ name, images, price, wight, discount }: IProduct) 
                         <Box sx={{ minWidth: '30px' }} />
                     </Badge>
                 </Box>
-                <IconButton sx={{ position: 'absolute', top: '0px', right: '1px' }}>
-                    <FavoriteBorderIcon />
+                <IconButton sx={{ position: 'absolute', top: '0px', right: '1px' }} onClick={handleLikeClick}>
+                    {hasLike ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon />}
                 </IconButton>
                 <CardMedia
                     component="img"

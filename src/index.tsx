@@ -7,10 +7,10 @@ import { ThemeProvider } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 
 createRoot(document.getElementById('root')!).render(
-    <StrictMode>
-        <ThemeProvider theme={theme}>
-            <CssBaseline enableColorScheme />
-            <App />
-        </ThemeProvider>
-    </StrictMode>
+    // <StrictMode>
+    <ThemeProvider theme={theme}>
+        <CssBaseline enableColorScheme />
+        <App />
+    </ThemeProvider>
+    // </StrictMode>
 );

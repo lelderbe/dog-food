@@ -1,11 +1,6 @@
 export {};
 
 declare global {
-    interface IProducts {
-        products: IProduct[];
-        length: number;
-    }
-
     interface IProduct {
         id: string;
         images: string;
@@ -23,7 +18,8 @@ declare global {
         userId?: string;
         tags: string[]; // TODO: check type
         category?: ICategory;
-        likes?: ILike[];
+        // likes?: ILike[];
+        likes?: IFavoriteUser[];
         reviews?: IReview[];
         user?: IUser;
     }
@@ -69,11 +65,19 @@ declare global {
         favoritesPost?: IFavoritesPost[];
     }
 
-    interface IFavoritesPost {
+    interface IFavorites {
         id: string;
         userId: string;
-        postId: string;
-        post?: IPost;
+        postId?: string;
+        productId: string;
+    }
+
+    interface IFavoriteUser extends IFavorites {
+        user: IUser;
+    }
+
+    interface IFavoritesPost extends IFavorites {
+        post: IPost;
     }
 
     interface IPost {
@@ -89,5 +93,10 @@ declare global {
         isPublished: boolean;
         favoritesCount: number;
         userId: string;
+    }
+
+    interface IProductLikeParam {
+        id: string;
+        likes: IFavoriteUser[];
     }
 }

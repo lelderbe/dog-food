@@ -1,28 +1,16 @@
-import { useEffect, useState } from 'react';
 import { ProductsList } from '../../components/products-list';
 import { Sort } from '../../components/sort';
-import { productsData } from '../../mocks/products';
 import { Container, Typography } from '@mui/material';
 import { plural } from '../../utils/common';
 
 interface IProps {
     search: string;
+    products: IProduct[];
+    currentUser: IUser | null;
+    onLike: (productData: IProductLikeParam) => void;
 }
 
-const rawProducts = productsData.products;
-
-export function HomePage({ search }: IProps) {
-    const [products, setProducts] = useState<IProduct[]>([]);
-
-    useEffect(() => {
-        if (search === '') {
-            setProducts(rawProducts);
-        }
-
-        const nextProducts = rawProducts.filter((item) => item.name.toLowerCase().includes(search));
-        setProducts(nextProducts);
-    }, [search]);
-
+export function HomePage({ search, products, currentUser, onLike }: IProps) {
     return (
         <Container component="main" disableGutters sx={{ padding: '20px 0', flex: '1' }}>
             {search === '' && (
@@ -39,7 +27,7 @@ export function HomePage({ search }: IProps) {
                     {plural(products.length, ['товар', 'товара', 'товаров'])}
                 </Typography>
             )}
-            <ProductsList products={products} />
+            <ProductsList products={products} currentUser={currentUser} onLike={onLike} />
         </Container>
     );
 }
