@@ -95,7 +95,7 @@ declare global {
         userId: string;
     }
 
-    interface IProductLikeParam {
+    interface IProductLikeParams {
         id: string;
         likes: IFavoriteUser[];
     }

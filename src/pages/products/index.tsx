@@ -1,18 +1,18 @@
 import { ProductsList } from '../../components/products-list';
 import { Sort } from '../../components/sort';
-import { Container, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { plural } from '../../utils/common';
 
 interface IProps {
     search: string;
     products: IProduct[];
     currentUser: IUser | null;
-    onLike: (productData: IProductLikeParam) => void;
+    onProductLike: (productData: IProductLikeParams) => Promise<IProduct | null>;
 }
 
-export function HomePage({ search, products, currentUser, onLike }: IProps) {
+export function ProductsPage({ search, products, currentUser, onProductLike }: IProps) {
     return (
-        <Container component="main" disableGutters sx={{ padding: '20px 0', flex: '1' }}>
+        <>
             {search === '' && (
                 <>
                     <Typography variant="h1" sx={{ mb: '20px' }}>
@@ -27,7 +27,7 @@ export function HomePage({ search, products, currentUser, onLike }: IProps) {
                     {plural(products.length, ['товар', 'товара', 'товаров'])}
                 </Typography>
             )}
-            <ProductsList products={products} currentUser={currentUser} onLike={onLike} />
-        </Container>
+            <ProductsList products={products} currentUser={currentUser} onProductLike={onProductLike} />
+        </>
     );
 }
