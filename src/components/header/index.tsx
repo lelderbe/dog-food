@@ -20,21 +20,23 @@ export function Header({ onChange }: IProps) {
                     </MuiLink>
                     <Search onChange={onChange} />
                     <Stack direction={'row'} gap={'10px'}>
-                        <MuiLink component={Link} to={'/favorites'} state={{ hasBack: true }} underline="none">
-                            <IconButton aria-label="add to favorites" sx={{ color: 'text.primary' }}>
-                                <Badge badgeContent={12} color="success">
-                                    <FavoriteBorderIcon />
-                                </Badge>
-                            </IconButton>
-                        </MuiLink>
+                        <IconButton
+                            component={Link}
+                            to={'/favorites'}
+                            state={{ hasBack: true }}
+                            aria-label="favorites"
+                            sx={{ color: 'text.primary' }}
+                        >
+                            <Badge badgeContent={12} color="success">
+                                <FavoriteBorderIcon />
+                            </Badge>
+                        </IconButton>
                         <IconButton aria-label="shop cart" sx={{ color: 'text.primary' }}>
                             <ShoppingBagOutlinedIcon />
                         </IconButton>
-                        <MuiLink component={Link} to={'/profile'} underline="none">
-                            <IconButton aria-label="open profile">
-                                <ProfileIcon />
-                            </IconButton>
-                        </MuiLink>
+                        <IconButton component={Link} to={'/profile'} aria-label="open profile">
+                            <ProfileIcon />
+                        </IconButton>
                     </Stack>
                 </Toolbar>
             </Container>
