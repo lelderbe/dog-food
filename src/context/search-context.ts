@@ -1,13 +1,13 @@
-import { createContext, useContext } from 'react';
+import { ChangeEvent, createContext, useContext } from 'react';
 
 interface ISearchContext {
     search: string;
-    onChange: React.Dispatch<React.SetStateAction<string>>;
+    onSearchChange: (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void;
 }
 
 export const SearchContext = createContext<ISearchContext>({
     search: '',
-    onChange: () => {},
+    onSearchChange: () => {},
 });
 
 SearchContext.displayName = 'SearchContext';

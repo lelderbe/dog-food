@@ -41,7 +41,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export function Search() {
-    const { search, onChange } = useSearch();
+    const { search, onSearchChange } = useSearch();
 
     return (
         <SearchElem>
@@ -52,7 +52,7 @@ export function Search() {
                 placeholder="Поиск"
                 inputProps={{ 'aria-label': 'search' }}
                 value={search}
-                onChange={(e) => onChange(e.target.value.toLowerCase())}
+                onChange={onSearchChange}
             />
         </SearchElem>
     );

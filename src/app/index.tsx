@@ -1,7 +1,7 @@
 import { HomePage } from '../pages/home';
 import { Footer } from '../components/footer';
 import { Header } from '../components/header';
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { api } from '../services/api';
 import { isLiked } from '../utils/common';
 import { Route, Routes } from 'react-router';
@@ -63,10 +63,14 @@ export function App() {
         return null;
     }
 
+    function handleSearchInputChange(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) {
+        setSearch(e.target.value.toLowerCase());
+    }
+
     return (
         <UserContext.Provider value={currentUser}>
             <ProductsContext.Provider value={{ products, onProductLike: handleProductLike }}>
-                <SearchContext.Provider value={{ search, onChange: setSearch }}>
+                <SearchContext.Provider value={{ search, onSearchChange: handleSearchInputChange }}>
                     <Header />
                     <Container
                         disableGutters
