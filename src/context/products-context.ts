@@ -8,8 +8,7 @@ interface IProductsContext {
 export const ProductsContext = createContext<IProductsContext>({
     products: [],
     onProductLike: async () => null,
-    // or second variant:
-    // onProductLike: () => Promise.resolve(null),
+    // onProductLike: () => Promise.resolve(null), // second variant
 });
 
 ProductsContext.displayName = 'ProductsContext';

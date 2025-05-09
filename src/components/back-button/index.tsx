@@ -14,7 +14,7 @@ export function BackButton({ text }: IProps) {
     return (
         <Button
             startIcon={<NavigateBeforeIcon sx={{ color: '#7B8E98' }} />}
-            sx={{ padding: '3px 0', mb: '4px' }}
+            sx={{ padding: '3px 0', mb: '4px', placeSelf: 'flex-start' }}
             // onClick={() => navigate(goto)}
             onClick={() => (location.state?.hasBack ? navigate(-1) : navigate('/'))}
         >

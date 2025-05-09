@@ -7,11 +7,7 @@ import { ProfileIcon } from '../../icons/profile';
 import { Link } from 'react-router-dom';
 import { useCurrentUser } from '../../context/user-context';
 
-interface IProps {
-    onChange: React.Dispatch<React.SetStateAction<string>>;
-}
-
-export function Header({ onChange }: IProps) {
+export function Header() {
     const currentUser = useCurrentUser();
     const likesCount = currentUser?.likes?.length || 0;
 
@@ -22,7 +18,7 @@ export function Header({ onChange }: IProps) {
                     <MuiLink component={Link} to={'/'} underline="none">
                         <Logo />
                     </MuiLink>
-                    <Search onChange={onChange} />
+                    <Search />
                     <Stack direction={'row'} gap={'10px'}>
                         <IconButton
                             component={Link}

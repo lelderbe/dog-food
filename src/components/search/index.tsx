@@ -1,6 +1,7 @@
 import { InputBase } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
+import { useSearch } from '../../context/search-context';
 
 const SearchElem = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -39,11 +40,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-interface IProps {
-    onChange: React.Dispatch<React.SetStateAction<string>>;
-}
+export function Search() {
+    const { search, onChange } = useSearch();
 
-export function Search({ onChange }: IProps) {
     return (
         <SearchElem>
             <SearchIconWrapper>
@@ -52,6 +51,7 @@ export function Search({ onChange }: IProps) {
             <StyledInputBase
                 placeholder="Поиск"
                 inputProps={{ 'aria-label': 'search' }}
+                value={search}
                 onChange={(e) => onChange(e.target.value.toLowerCase())}
             />
         </SearchElem>

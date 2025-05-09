@@ -3,13 +3,13 @@ import { Sort } from '../../components/sort';
 import { Typography } from '@mui/material';
 import { plural } from '../../utils/common';
 import { useProducts } from '../../context/products-context';
+import { Spinner } from '../../components/spinner';
+import { useSearch } from '../../context/search-context';
 
-interface IProps {
-    search: string;
-}
-
-export function ProductsPage({ search }: IProps) {
+export function ProductsPage() {
+    const { search } = useSearch();
     const { products } = useProducts();
+    const isLoading = search === '' && products.length === 0;
 
     return (
         <>
@@ -27,7 +27,8 @@ export function ProductsPage({ search }: IProps) {
                     {plural(products.length, ['товар', 'товара', 'товаров'])}
                 </Typography>
             )}
-            <ProductsList products={products} />
+            {!isLoading && <ProductsList products={products} />}
+            {isLoading && <Spinner />}
         </>
     );
 }

@@ -13,6 +13,7 @@ import { Container } from '@mui/material';
 import { FavoritesPage } from '../pages/favorites';
 import { UserContext } from '../context/user-context';
 import { ProductsContext } from '../context/products-context';
+import { SearchContext } from '../context/search-context';
 
 export function App() {
     const [search, setSearch] = useState('');
@@ -65,18 +66,23 @@ export function App() {
     return (
         <UserContext.Provider value={currentUser}>
             <ProductsContext.Provider value={{ products, onProductLike: handleProductLike }}>
-                <Header onChange={setSearch} />
-                <Container disableGutters sx={{ padding: '20px 0', flex: '1' }}>
-                    <Routes>
-                        <Route path="/" element={<HomePage />} />
-                        <Route path="/profile" element={<ProfilePage />} />
-                        <Route path="/favorites" element={<FavoritesPage />} />
-                        <Route path="/products" element={<ProductsPage search={search} />} />
-                        <Route path="/products/:id" element={<SingleProductPage />} />
-                        <Route path="*" element={<NotFoundPage />} />
-                    </Routes>
-                </Container>
-                <Footer />
+                <SearchContext.Provider value={{ search, onChange: setSearch }}>
+                    <Header />
+                    <Container
+                        disableGutters
+                        sx={{ display: 'flex', flexDirection: 'column', padding: '20px 0', flex: '1' }}
+                    >
+                        <Routes>
+                            <Route path="/" element={<HomePage />} />
+                            <Route path="/profile" element={<ProfilePage />} />
+                            <Route path="/favorites" element={<FavoritesPage />} />
+                            <Route path="/products" element={<ProductsPage />} />
+                            <Route path="/products/:id" element={<SingleProductPage />} />
+                            <Route path="*" element={<NotFoundPage />} />
+                        </Routes>
+                    </Container>
+                    <Footer />
+                </SearchContext.Provider>
             </ProductsContext.Provider>
         </UserContext.Provider>
     );
