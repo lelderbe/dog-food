@@ -2,15 +2,15 @@ import { ProductsList } from '../../components/products-list';
 import { Sort } from '../../components/sort';
 import { Typography } from '@mui/material';
 import { plural } from '../../utils/common';
+import { useProducts } from '../../context/products-context';
 
 interface IProps {
     search: string;
-    products: IProduct[];
-    currentUser: IUser | null;
-    onProductLike: (productData: IProductLikeParams) => Promise<IProduct | null>;
 }
 
-export function ProductsPage({ search, products, currentUser, onProductLike }: IProps) {
+export function ProductsPage({ search }: IProps) {
+    const { products, onProductLike } = useProducts();
+
     return (
         <>
             {search === '' && (
@@ -27,7 +27,7 @@ export function ProductsPage({ search, products, currentUser, onProductLike }: I
                     {plural(products.length, ['товар', 'товара', 'товаров'])}
                 </Typography>
             )}
-            <ProductsList products={products} currentUser={currentUser} onProductLike={onProductLike} />
+            <ProductsList products={products} onProductLike={onProductLike} />
         </>
     );
 }

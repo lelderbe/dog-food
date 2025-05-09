@@ -15,13 +15,14 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import noImage from './assets/no-image.png';
 import { isLiked } from '../../utils/common';
 import { Link } from 'react-router-dom';
+import { useCurrentUser } from '../../context/user-context';
 
 interface IProps extends IProduct {
-    currentUser: IUser | null;
     onProductLike: (productData: IProductLikeParams) => Promise<IProduct | null>;
 }
 
-export function ProductCard({ id, name, images, price, wight, discount, likes, currentUser, onProductLike }: IProps) {
+export function ProductCard({ id, name, images, price, wight, discount, likes, onProductLike }: IProps) {
+    const currentUser = useCurrentUser();
     const discountPrice = price - (price * discount) / 100;
     const isProductLiked = isLiked(likes, currentUser?.id);
 

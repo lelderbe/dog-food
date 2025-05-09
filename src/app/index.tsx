@@ -11,6 +11,8 @@ import { NotFoundPage } from '../pages/404';
 import { SingleProductPage } from '../pages/single-product';
 import { Container } from '@mui/material';
 import { FavoritesPage } from '../pages/favorites';
+import { UserContext } from '../context/user-context';
+import { ProductsContext } from '../context/products-context';
 
 export function App() {
     const [search, setSearch] = useState('');
@@ -55,32 +57,21 @@ export function App() {
     }
 
     return (
-        <>
-            <Header onChange={setSearch} />
-            <Container disableGutters sx={{ padding: '20px 0', flex: '1' }}>
-                <Routes>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/profile" element={<ProfilePage />} />
-                    <Route path="/favorites" element={<FavoritesPage />} />
-                    <Route
-                        path="/products"
-                        element={
-                            <ProductsPage
-                                search={search}
-                                products={products}
-                                currentUser={currentUser}
-                                onProductLike={handleProductLike}
-                            />
-                        }
-                    />
-                    <Route
-                        path="/products/:id"
-                        element={<SingleProductPage currentUser={currentUser} onProductLike={handleProductLike} />}
-                    />
-                    <Route path="*" element={<NotFoundPage />} />
-                </Routes>
-            </Container>
-            <Footer />
-        </>
+        <UserContext.Provider value={currentUser}>
+            <ProductsContext.Provider value={{ products, onProductLike: handleProductLike }}>
+                <Header onChange={setSearch} />
+                <Container disableGutters sx={{ padding: '20px 0', flex: '1' }}>
+                    <Routes>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/profile" element={<ProfilePage />} />
+                        <Route path="/favorites" element={<FavoritesPage />} />
+                        <Route path="/products" element={<ProductsPage search={search} />} />
+                        <Route path="/products/:id" element={<SingleProductPage />} />
+                        <Route path="*" element={<NotFoundPage />} />
+                    </Routes>
+                </Container>
+                <Footer />
+            </ProductsContext.Provider>
+        </UserContext.Provider>
     );
 }

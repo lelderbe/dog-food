@@ -3,14 +3,14 @@ import { Box, Typography, Stack, CardMedia, Button } from '@mui/material';
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
 import { isLiked } from '../../utils/common';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { useCurrentUser } from '../../context/user-context';
 
 interface IProps extends IProduct {
-    currentUser: IUser | null;
     onProductLike: (productData: IProductLikeParams) => void;
 }
 
-export function ProductDetail({ id, name, images, price, likes, onProductLike, currentUser }: IProps) {
-    // const currentUser = useContext(UserContext);
+export function ProductDetail({ id, name, images, price, likes, onProductLike }: IProps) {
+    const currentUser = useCurrentUser();
 
     function handleLikeClick() {
         if (likes) {

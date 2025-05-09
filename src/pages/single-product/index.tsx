@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
-import { Container } from '@mui/material';
+import { useEffect, useState } from 'react';
 // import ProductDetail from '../../components/product-detail';
 import { useParams } from 'react-router-dom';
 import { Spinner } from '../../components/spinner';
@@ -7,16 +6,11 @@ import { NotFoundPage } from '../404';
 import { ProductDetail } from '../../components/product-detail';
 import { api } from '../../services/api';
 import { BackButton } from '../../components/back-button';
+import { useProducts } from '../../context/products-context';
 // import GoToBackButton from '../../components/go-to-back';
-// import { IProductsContext, ProductsContext } from '../../context/products-context';
 
-interface IProps {
-    currentUser: IUser | null;
-    onProductLike: (productData: IProductLikeParams) => Promise<IProduct | null>;
-}
-
-export const SingleProductPage = ({ currentUser, onProductLike }: IProps) => {
-    // const { onProductLike } = useContext(ProductsContext) as IProductsContext;
+export const SingleProductPage = () => {
+    const { onProductLike } = useProducts();
     const { id } = useParams();
 
     const [product, setProduct] = useState<IProduct | null>(null);
@@ -59,7 +53,7 @@ export const SingleProductPage = ({ currentUser, onProductLike }: IProps) => {
     return (
         <>
             <BackButton />
-            {product && <ProductDetail {...product} currentUser={currentUser} onProductLike={handleProductLike} />}
+            {product && <ProductDetail {...product} onProductLike={handleProductLike} />}
         </>
     );
 };
