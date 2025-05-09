@@ -9,7 +9,7 @@ interface IProps {
 }
 
 export function ProductsPage({ search }: IProps) {
-    const { products, onProductLike } = useProducts();
+    const { products } = useProducts();
 
     return (
         <>
@@ -27,7 +27,7 @@ export function ProductsPage({ search }: IProps) {
                     {plural(products.length, ['товар', 'товара', 'товаров'])}
                 </Typography>
             )}
-            <ProductsList products={products} onProductLike={onProductLike} />
+            <ProductsList products={products} />
         </>
     );
 }

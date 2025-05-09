@@ -5,12 +5,16 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import { ProfileIcon } from '../../icons/profile';
 import { Link } from 'react-router-dom';
+import { useCurrentUser } from '../../context/user-context';
 
 interface IProps {
     onChange: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export function Header({ onChange }: IProps) {
+    const currentUser = useCurrentUser();
+    const likesCount = currentUser?.likes?.length || 0;
+
     return (
         <AppBar position="static" elevation={0}>
             <Container maxWidth="lg" disableGutters sx={{ py: '12px' }}>
@@ -27,7 +31,7 @@ export function Header({ onChange }: IProps) {
                             aria-label="favorites"
                             sx={{ color: 'text.primary' }}
                         >
-                            <Badge badgeContent={12} color="success">
+                            <Badge badgeContent={likesCount} color="success">
                                 <FavoriteBorderIcon />
                             </Badge>
                         </IconButton>

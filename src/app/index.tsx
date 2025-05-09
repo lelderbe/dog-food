@@ -49,6 +49,12 @@ export function App() {
                 return item;
             });
             setRawProducts(nextRawProducts);
+            setTimeout(() => {
+                // setTimeout - because backend returns old data, so we wait for update 1 second
+                api.getUserInfo()
+                    .then((data) => setCurrentUser(data))
+                    .catch((error) => console.log(error));
+            }, 1000);
             return updatedProduct;
         } catch (error) {
             console.log(error);

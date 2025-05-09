@@ -16,13 +16,13 @@ import noImage from './assets/no-image.png';
 import { isLiked } from '../../utils/common';
 import { Link } from 'react-router-dom';
 import { useCurrentUser } from '../../context/user-context';
+import { useProducts } from '../../context/products-context';
 
-interface IProps extends IProduct {
-    onProductLike: (productData: IProductLikeParams) => Promise<IProduct | null>;
-}
+interface IProps extends IProduct {}
 
-export function ProductCard({ id, name, images, price, wight, discount, likes, onProductLike }: IProps) {
+export function ProductCard({ id, name, images, price, wight, discount, likes }: IProps) {
     const currentUser = useCurrentUser();
+    const { onProductLike } = useProducts();
     const discountPrice = price - (price * discount) / 100;
     const isProductLiked = isLiked(likes, currentUser?.id);
 

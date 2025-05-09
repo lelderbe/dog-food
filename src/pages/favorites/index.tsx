@@ -1,15 +1,15 @@
 import { Typography } from '@mui/material';
 import { BackButton } from '../../components/back-button';
-import { useContext } from 'react';
-// import { IProductsContext, ProductsContext } from '../../context/products-context';
-// import { UserContext } from '../../context/user-context';
+import { useProducts } from '../../context/products-context';
+import { useCurrentUser } from '../../context/user-context';
+import { isLiked } from '../../utils/common';
 import { ProductsList } from '../../components/products-list';
 
 export const FavoritesPage = () => {
-    // const { products } = useContext(ProductsContext) as IProductsContext;
-    // const currentUser = useContext(UserContext);
+    const currentUser = useCurrentUser();
+    const { products } = useProducts();
 
-    // const favoriteProducts = products?.filter((item) => isLiked(item.likes, currentUser?.id)) || [];
+    const favoriteProducts = products?.filter((item) => isLiked(item.likes, currentUser?.id)) || [];
 
     return (
         <>
@@ -17,7 +17,7 @@ export const FavoritesPage = () => {
             <Typography variant="h1" sx={{ mb: '20px' }}>
                 Избранное
             </Typography>
-            {/* <ProductsList products={favoriteProducts} /> */}
+            <ProductsList products={favoriteProducts} />
         </>
     );
 };
