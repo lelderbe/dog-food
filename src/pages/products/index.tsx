@@ -5,11 +5,13 @@ import { plural } from '../../utils/common';
 import { useProducts } from '../../context/products-context';
 import { Spinner } from '../../components/spinner';
 import { useSearch } from '../../context/search-context';
+import { ErrorMessageBlock } from '../../components/error-message-block';
 
 export function ProductsPage() {
     const { search } = useSearch();
     const { products } = useProducts();
-    const isLoading = search === '' && products.length === 0;
+    const emptyProducts = products.length === 0;
+    const isLoading = search === '' && emptyProducts;
 
     return (
         <>
@@ -27,8 +29,12 @@ export function ProductsPage() {
                     {plural(products.length, ['товар', 'товара', 'товаров'])}
                 </Typography>
             )}
-            {!isLoading && <ProductsList products={products} />}
+
             {isLoading && <Spinner />}
+            {!isLoading && emptyProducts && (
+                <ErrorMessageBlock text={'Простите, по вашему запросу\nтоваров не найдено'} />
+            )}
+            {!isLoading && !emptyProducts && <ProductsList products={products} />}
         </>
     );
 }

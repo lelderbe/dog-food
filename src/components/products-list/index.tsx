@@ -1,6 +1,6 @@
 import { Grid, Pagination, Stack } from '@mui/material';
 import { ProductCard } from '../product-card';
-import { ProductsNotFound } from './products-not-found';
+import { ErrorMessageBlock } from '../error-message-block';
 import { usePagination } from '../../hooks/use-pagination';
 import { ChangeEvent } from 'react';
 
@@ -21,10 +21,6 @@ export function ProductsList({ products }: IProps) {
     }
 
     const productsToShow = getCurrentData();
-
-    if (!productsToShow?.length) {
-        return <ProductsNotFound />;
-    }
 
     return (
         <>
