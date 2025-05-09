@@ -30,11 +30,8 @@ export function App() {
     }, []);
 
     useEffect(() => {
-        if (search === '') {
-            setProducts(rawProducts);
-        }
-
-        const nextProducts = rawProducts.filter((item) => item.name.toLowerCase().includes(search));
+        const nextProducts =
+            search === '' ? rawProducts : rawProducts.filter((item) => item.name.toLowerCase().includes(search));
         setProducts(nextProducts);
     }, [search, rawProducts]);
 
