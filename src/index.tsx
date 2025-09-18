@@ -5,12 +5,15 @@ import { App } from './app';
 import { theme } from './styles/theme';
 import { ThemeProvider } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
+import { BrowserRouter } from 'react-router-dom';
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
-        <ThemeProvider theme={theme}>
-            <CssBaseline enableColorScheme />
-            <App />
-        </ThemeProvider>
+        <BrowserRouter>
+            <ThemeProvider theme={theme}>
+                <CssBaseline enableColorScheme />
+                <App />
+            </ThemeProvider>
+        </BrowserRouter>
     </StrictMode>
 );

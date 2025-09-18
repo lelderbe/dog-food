@@ -1,14 +1,40 @@
-import { Button, Card as MUICard, CardMedia, Grid, IconButton, Typography, Badge, Box } from '@mui/material';
+import {
+    Button,
+    Card as MuiCard,
+    CardMedia,
+    Grid,
+    IconButton,
+    Typography,
+    Badge,
+    Box,
+    Link as MuiLink,
+} from '@mui/material';
 import { SyntheticEvent } from 'react';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import noImage from './assets/no-image.png';
+import { isLiked } from '../../utils/common';
+import { Link } from 'react-router-dom';
+import { useCurrentUser } from '../../context/user-context';
+import { useProducts } from '../../context/products-context';
 
-export function ProductCard({ name, images, price, wight, discount }: IProduct) {
+interface IProps extends IProduct {}
+
+export function ProductCard({ id, name, images, price, wight, discount, likes }: IProps) {
+    const currentUser = useCurrentUser();
+    const { onProductLike } = useProducts();
     const discountPrice = price - (price * discount) / 100;
+    const isProductLiked = isLiked(likes, currentUser?.id);
+
+    const handleLikeClick = () => {
+        if (likes) {
+            onProductLike({ id, likes });
+        }
+    };
 
     return (
         <Grid size={{ xs: 6, sm: 4, md: 4, lg: 3 }}>
-            <MUICard elevation={0} sx={{ position: 'relative', minWidth: '236px', maxWidth: '236px' }}>
+            <MuiCard elevation={0} sx={{ position: 'relative', minWidth: '236px', maxWidth: '236px' }}>
                 <Box sx={{ position: 'absolute', top: '4px' }}>
                     <Badge
                         badgeContent={`-${discount} %`}
@@ -25,16 +51,18 @@ export function ProductCard({ name, images, price, wight, discount }: IProduct) 
                         <Box sx={{ minWidth: '30px' }} />
                     </Badge>
                 </Box>
-                <IconButton sx={{ position: 'absolute', top: '0px', right: '1px' }}>
-                    <FavoriteBorderIcon />
+                <IconButton sx={{ position: 'absolute', top: '0px', right: '1px' }} onClick={handleLikeClick}>
+                    {isProductLiked ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon />}
                 </IconButton>
-                <CardMedia
-                    component="img"
-                    image={images}
-                    alt={name}
-                    onError={(e: SyntheticEvent<HTMLImageElement>) => (e.currentTarget.src = noImage)}
-                    sx={{ width: '187px', height: '187px', margin: '0 auto 16px', objectFit: 'contain' }}
-                />
+                <MuiLink component={Link} to={id} state={{ hasBack: true }} underline="none">
+                    <CardMedia
+                        component="img"
+                        image={images}
+                        alt={name}
+                        onError={(e: SyntheticEvent<HTMLImageElement>) => (e.currentTarget.src = noImage)}
+                        sx={{ width: '187px', height: '187px', margin: '0 auto 16px', objectFit: 'contain' }}
+                    />
+                </MuiLink>
                 <Typography component="p" variant="s1" sx={{ textDecoration: 'line-through', minHeight: '14px' }}>
                     {discount ? `${price} ₽` : ''}
                 </Typography>
@@ -71,7 +99,7 @@ export function ProductCard({ name, images, price, wight, discount }: IProduct) 
                     {name}
                 </Typography>
                 <Button variant="primary">В корзину</Button>
-            </MUICard>
+            </MuiCard>
         </Grid>
     );
 }
